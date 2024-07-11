@@ -18,20 +18,22 @@ import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {ComponentsModule} from "./components/components.module";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
-    imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        RouterModule,
-        AppRoutingModule,
-        NgbModule,
-        ToastrModule,
-        ComponentsModule
-    ],
-  declarations: [AppComponent, DashboardComponent, IconsComponent, AdminLayoutComponent, MapsComponent, NotificationsComponent, TableListComponent, TypographyComponent, UserProfileComponent],
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+    NgbModule,
+    ToastrModule,
+    ComponentsModule,
+    MatTooltipModule
+  ],
+  declarations: [AppComponent, AdminLayoutComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
