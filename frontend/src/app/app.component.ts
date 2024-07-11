@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiService } from "./api-service.service";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'black-dashboard-angular';
+  title = 'Housing Price Pilot';
   message: any;
 
   constructor(private apiService: ApiService) {
@@ -15,8 +16,7 @@ export class AppComponent {
 
   onClick(): void
   {
-    this.apiService.
-    getHelloMessage().subscribe(response => {
+    this.apiService.getHelloMessage().subscribe(response => {
         this.message = response;
         console.log(response);
       },

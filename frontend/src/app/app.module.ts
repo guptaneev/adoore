@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {NgModule} from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ToastrModule } from 'ngx-toastr';
@@ -17,17 +17,20 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import {ComponentsModule} from "./components/components.module";
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule,
-    NgbModule,
-    ToastrModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+        NgbModule,
+        ToastrModule,
+        ComponentsModule
+    ],
   declarations: [AppComponent, DashboardComponent, IconsComponent, AdminLayoutComponent, MapsComponent, NotificationsComponent, TableListComponent, TypographyComponent, UserProfileComponent],
   providers: [],
   bootstrap: [AppComponent]

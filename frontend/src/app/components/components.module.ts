@@ -8,10 +8,15 @@ import {RouterLinkWithHref} from "@angular/router";
 
 
 @NgModule({
-  declarations: [
+    declarations: [
+        FooterComponent,
+        NavbarComponent,
+        SidebarComponent
+    ],
+  exports: [
     FooterComponent,
-    NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    NavbarComponent
   ],
     imports: [
         CommonModule,
