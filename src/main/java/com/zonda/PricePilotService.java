@@ -1,4 +1,4 @@
-package org.zonda;
+package com.zonda;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
