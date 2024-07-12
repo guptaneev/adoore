@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from "./api-service.service";
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +9,7 @@ import { ApiService } from "./api-service.service";
 export class AppComponent {
   title = 'Housing Price Pilot';
   message: any;
+  citySearch: any;
 
   constructor(private apiService: ApiService) {
   }
@@ -22,7 +22,6 @@ export class AppComponent {
       },
       error => {
         console.error('Error fetching message', error);
-      }
-    );
+      });
   }
 }
