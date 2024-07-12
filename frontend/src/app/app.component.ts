@@ -7,7 +7,7 @@ import { ApiService } from "./api-service.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Housing Price Pilot';
+  title = 'adoore.';
   message: any;
   citySearch: any;
 
