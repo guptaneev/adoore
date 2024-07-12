@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HousingLocation } from '../housing-location';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-topbar',
@@ -7,15 +6,25 @@ import { HousingLocation } from '../housing-location';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent implements OnInit {
+  userCities: string[] = [];
   cityInput: string = '';
-  citySearch: string = '';
+  cityList: string[] = ['austin', 'houston', 'dallas'];
+  lowercaseInput: string = '';
 
   constructor() { }
 
   searchButton() {
-    this.citySearch = this.cityInput;
-    console.log('Data used ', this.citySearch)
+    this.lowercaseInput = this.cityInput.toLowerCase();
+    if (this.cityList.includes(this.lowercaseInput) && !(this.userCities.includes(this.lowercaseInput))) {
+      console.log('Data used', this.lowercaseInput)
+      this.userCities.push(this.lowercaseInput);
+      console.log(this.userCities);
+    }
+    else {
+      console.log('Invalid/Duplicate city', this.cityInput);
+    }
   }
+
   ngOnInit(): void { }
 }
 

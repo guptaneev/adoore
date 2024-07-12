@@ -8,18 +8,15 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
-import { TopbarComponent } from './topbar/topbar.component';
-import { HousingLocationComponent } from './housing-location/housing-location.component';
-import { DetailsComponent } from './details/details.component';
-import { ScrollingListComponent } from './scrolling-list/scrolling-list.component';
 import {AppRoutingModule} from "./app.routing.module";
+import {TopbarComponent} from "./topbar/topbar.component";
+import {CitiesListComponent} from "./cities-list/cities-list.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
-    DetailsComponent,
-    ScrollingListComponent,
+    CitiesListComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,10 +28,9 @@ import {AppRoutingModule} from "./app.routing.module";
     MatTooltipModule,
     BrowserModule,
     AppRoutingModule,
-    HousingLocationComponent,
 
   ],
-  providers: [],
+  providers: [TopbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
