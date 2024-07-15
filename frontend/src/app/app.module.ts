@@ -6,17 +6,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserModule } from "@angular/platform-browser";
-
 import { AppComponent } from "./app.component";
 import {AppRoutingModule} from "./app.routing.module";
 import {TopbarComponent} from "./topbar/topbar.component";
 import {CitiesListComponent} from "./cities-list/cities-list.component";
+import {CitySearchResultsComponent} from "./city-search-results/city-search-results.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
-    CitiesListComponent
+    CitiesListComponent,
+    CitySearchResultsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -28,7 +29,6 @@ import {CitiesListComponent} from "./cities-list/cities-list.component";
     MatTooltipModule,
     BrowserModule,
     AppRoutingModule,
-
   ],
   providers: [TopbarComponent],
   bootstrap: [AppComponent]

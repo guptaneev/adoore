@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TopbarComponent} from "../topbar/topbar.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cities-list',
@@ -7,15 +8,17 @@ import {TopbarComponent} from "../topbar/topbar.component";
   styleUrls: ['./cities-list.component.css']
 })
 export class CitiesListComponent implements OnInit {
- userCitiesList: string[] = [];
+  userCitiesList: string[] = [];
 
-  constructor(private topbarComponent:TopbarComponent) {
-     this.userCitiesList = this.topbarComponent.userCities;
+  constructor(private topbarComponent: TopbarComponent, private router: Router) {
+    this.userCitiesList = this.topbarComponent.userCities;
+  }
+
+  goToResults() {
+    this.router.navigate(['/results'])
   }
 
 
   ngOnInit(): void {
   }
-
-  protected readonly console = console;
 }

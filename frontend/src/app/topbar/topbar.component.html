@@ -1,6 +1,7 @@
 <section>
-  <form id="search-input">
+  <form>
     <input type="text" placeholder="Filter by city" [(ngModel)]="cityInput" />
+    <button type="button" (click)="searchButton()">Search by city</button>
   </form>
 </section>
 <section class="results">

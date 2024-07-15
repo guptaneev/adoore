@@ -9,7 +9,6 @@ import { ApiService } from "./api-service.service";
 export class AppComponent {
   title = 'adoore.';
   message: any;
-  citySearch: any;
 
   constructor(private apiService: ApiService) {
   }
