@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CitiesListComponent} from "../cities-list/cities-list.component";
-import {CityData} from "../city-data";
-import {TopbarComponent} from "../topbar/topbar.component";
+import {ApiService} from "../api-service.service";
 
 @Component({
   selector: 'app-city-search-results',
@@ -9,14 +7,13 @@ import {TopbarComponent} from "../topbar/topbar.component";
   styleUrls: ['./city-search-results.component.css']
 })
 export class CitySearchResultsComponent implements OnInit {
-  userCitiesList: string[] = [];
+  userCitiesList: string[] = this.apiService.getUserSelectedCities();
 
-  constructor(private topbarComponent:TopbarComponent) {
-    this.userCitiesList = this.topbarComponent.userCities;
+  constructor(private apiService: ApiService) {
+    console.log(this.userCitiesList);
   }
+
   ngOnInit(): void {
   }
-
-
 
 }

@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {TopbarComponent} from "../topbar/topbar.component";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {AppComponent} from "../app.component";
+import {ApiService} from "../api-service.service";
 
 @Component({
   selector: 'app-cities-list',
@@ -8,16 +8,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./cities-list.component.css']
 })
 export class CitiesListComponent implements OnInit {
-  userCitiesList: string[] = [];
+  userCitiesList: string[] = this.apiService.getUserSelectedCities();
 
-  constructor(private topbarComponent: TopbarComponent, private router: Router) {
-    this.userCitiesList = this.topbarComponent.userCities;
+  constructor(private apiService: ApiService, private appComponent: AppComponent) {
+
   }
-
   goToResults() {
-    this.router.navigate(['/results'])
+    this.appComponent.toggleTopbar()
   }
-
 
   ngOnInit(): void {
   }

@@ -1,9 +1,10 @@
-<section>
-  <form>
+<button style="padding-top: 10px; padding-bottom: 10px; margin-bottom: 10px; margin-top: 10px" (click)="onClick()">This is a sample API Call!</button>
+<p style="color:brown">Here is the result!: {{ message }}</p>
+
+ <form>
     <input type="text" placeholder="Filter by city" [(ngModel)]="cityInput" />
     <button type="button" (click)="searchButton()">Search by city</button>
   </form>
-</section>
 <section class="results">
   <app-cities-list></app-cities-list>
 </section>

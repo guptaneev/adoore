@@ -30,7 +30,7 @@ import {CitySearchResultsComponent} from "./city-search-results/city-search-resu
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [TopbarComponent],
+  providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

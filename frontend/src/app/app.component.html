@@ -1,7 +1,12 @@
 <h1>{{ title }}</h1>
 <p>Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</p>
-<button style="padding-top: 10px; padding-bottom: 10px; margin-bottom: 10px; margin-top: 10px" (click)="onClick()">This is a sample API Call!</button>
-<p style="color:brown">Here is the result!: {{ message }}</p>
+<p (click)="this.toggleTopbar()">Home</p>
+
 <section class="content">
-  <router-outlet></router-outlet>
+  <ng-container *ngIf="showTopbar">
+    <app-topbar></app-topbar>
+  </ng-container>
+  <ng-container *ngIf="!showTopbar">
+    <app-city-search-results></app-city-search-results>
+  </ng-container>
 </section>

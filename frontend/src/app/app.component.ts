@@ -8,19 +8,14 @@ import { ApiService } from "./api-service.service";
 })
 export class AppComponent {
   title = 'adoore.';
-  message: any;
+  showTopbar: boolean = true;
 
   constructor(private apiService: ApiService) {
   }
 
-  onClick(): void
-  {
-    this.apiService.getHelloMessage().subscribe(response => {
-        this.message = response;
-        console.log(response);
-      },
-      error => {
-        console.error('Error fetching message', error);
-      });
+
+
+  toggleTopbar(): void {
+    this.showTopbar = !this.showTopbar;
   }
 }
