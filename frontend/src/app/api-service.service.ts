@@ -42,4 +42,9 @@ export class ApiService {
     return this.validCities.includes(city);
   }
 
+  removeCity(city: string) {
+    console.log(city);
+    this.userSelectedCities.splice(this.userSelectedCities.indexOf(city), 1);
+  }
 }
+

@@ -1,12 +1,12 @@
 <h1>{{ title }}</h1>
 <p>Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</p>
-<p (click)="this.toggleTopbar()">Home</p>
+<ul style="font-size: 15px; color: #007bff;" (click)="this.setTopbar(true); this.apiService.clearUserSelectedCities();">Home</ul>
 
 <section class="content">
-  <ng-container *ngIf="showTopbar">
+  <ng-container *ngIf="this.getTopbar()">
     <app-topbar></app-topbar>
   </ng-container>
-  <ng-container *ngIf="!showTopbar">
+  <ng-container *ngIf="!(this.getTopbar())">
     <app-city-search-results></app-city-search-results>
   </ng-container>
 </section>

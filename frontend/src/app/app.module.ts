@@ -11,6 +11,7 @@ import {AppRoutingModule} from "./app.routing.module";
 import {TopbarComponent} from "./topbar/topbar.component";
 import {CitiesListComponent} from "./cities-list/cities-list.component";
 import {CitySearchResultsComponent} from "./city-search-results/city-search-results.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -19,17 +20,18 @@ import {CitySearchResultsComponent} from "./city-search-results/city-search-resu
     CitiesListComponent,
     CitySearchResultsComponent
   ],
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule,
-    ToastrModule.forRoot(), // Added .forRoot()
-    MatTooltipModule,
-    BrowserModule,
-    AppRoutingModule,
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgbModule,
+        ToastrModule.forRoot(), // Added .forRoot()
+        MatTooltipModule,
+        BrowserModule,
+        AppRoutingModule,
+        NgOptimizedImage,
+    ],
   providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
   bootstrap: [AppComponent]
 })

@@ -8,14 +8,22 @@ import { ApiService } from "./api-service.service";
 })
 export class AppComponent {
   title = 'adoore.';
-  showTopbar: boolean = true;
+  private showTopbar: boolean = true;
 
-  constructor(private apiService: ApiService) {
+  constructor(protected apiService: ApiService) {
   }
 
 
 
   toggleTopbar(): void {
     this.showTopbar = !this.showTopbar;
+  }
+
+  setTopbar(value: boolean) {
+    this.showTopbar = value;
+  }
+
+  getTopbar() {
+    return this.showTopbar;
   }
 }

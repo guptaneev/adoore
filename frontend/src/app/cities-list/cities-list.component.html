@@ -1,6 +1,7 @@
-<section class="cities-list">
+<section class="city-list-container">
   <ul *ngFor="let city of userCitiesList">
-    <li>{{ city }}
+    <li class="list-item">{{ city }} <img ngSrc="././close-icon.png" alt="x" (click)="this.apiService.removeCity(city)"
+                                          height="512" width="512"></li>
   </ul>
 </section>
 <section>

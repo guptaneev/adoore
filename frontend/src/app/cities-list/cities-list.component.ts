@@ -5,12 +5,12 @@ import {ApiService} from "../api-service.service";
 @Component({
   selector: 'app-cities-list',
   templateUrl: './cities-list.component.html',
-  styleUrls: ['./cities-list.component.css']
+  styleUrls: ['./cities-list.component.scss']
 })
 export class CitiesListComponent implements OnInit {
   userCitiesList: string[] = this.apiService.getUserSelectedCities();
 
-  constructor(private apiService: ApiService, private appComponent: AppComponent) {
+  constructor(protected apiService: ApiService, private appComponent: AppComponent) {
 
   }
   goToResults() {
