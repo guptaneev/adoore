@@ -12,9 +12,10 @@ import { ApiService } from '../api-service.service';
 export class TopbarComponent implements OnInit {
   cityInputControl = new FormControl();
   filteredCities: Observable<string[]>;
+  cityInput: string = '';
   message: any;
   lowercaseInput: string = '';
-  cityOptions: string[] = ['Austin', "Dallas", "Houston"];
+  cityOptions: string[] = ['Austin','Dallas','Houston'];
 
   constructor(private apiService: ApiService) {
     this.filteredCities = this.cityInputControl.valueChanges.pipe(

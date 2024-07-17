@@ -23,21 +23,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CitiesListComponent,
     CitySearchResultsComponent
   ],
-    imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        NgbModule,
-        ToastrModule.forRoot(), // Added .forRoot()
-        MatTooltipModule,
-        BrowserModule,
-        AppRoutingModule,
-        NgOptimizedImage,
-        MatAutocompleteModule,
-        MatInputModule,
-        MatFormFieldModule
-    ],
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
+    ToastrModule.forRoot(), // Added .forRoot()
+    MatTooltipModule,
+    BrowserModule,
+    AppRoutingModule,
+    NgOptimizedImage,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
+  ],
   providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
   bootstrap: [AppComponent]
 })

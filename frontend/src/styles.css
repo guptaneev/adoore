@@ -39,9 +39,10 @@ a:hover {
 }
 
 .landing-page {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  background: url('/assets/background-image.jpg') no-repeat center center/cover;
+  background: url('/assets/your-background-image.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,14 +52,12 @@ a:hover {
 
 .zoomed-in .landing-page {
   transform: scale(1.1);
-
 }
 
 .content {
   position: relative;
   z-index: 2;
-  background-color: #FBCB33;
-  opacity: 0.9;
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

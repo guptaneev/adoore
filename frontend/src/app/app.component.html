@@ -1,15 +1,12 @@
-<div class="landing-page" [ngClass]="{'zoomed-in': !getTopbar()}">
-  <div class="content">
-    <h1>{{ title }}</h1>
-    <p>Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</p>
-    <ul style="font-size: 15px; color: #007bff; cursor: pointer;" (click)="setTopbar(true); apiService.clearUserSelectedCities();">Home</ul>
-    <section class="content">
-      <ng-container *ngIf="getTopbar()">
-        <app-topbar></app-topbar>
-      </ng-container>
-      <ng-container *ngIf="!getTopbar()">
-        <app-city-search-results></app-city-search-results>
-      </ng-container>
-    </section>
-  </div>
-</div>
+<h1>{{ title }}</h1>
+<p>Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</p>
+<ul style="font-size: 15px; color: #007bff;" (click)="this.setTopbar(true); this.apiService.clearUserSelectedCities();">Home</ul>
+
+<section class="content">
+  <ng-container *ngIf="this.getTopbar()">
+    <app-topbar></app-topbar>
+  </ng-container>
+  <ng-container *ngIf="!(this.getTopbar())">
+    <app-city-search-results></app-city-search-results>
+  </ng-container>
+</section>
