@@ -10,10 +10,7 @@ export class AppComponent {
   title = 'adoore.';
   private showTopbar: boolean = true;
 
-  constructor(protected apiService: ApiService) {
-  }
-
-
+  constructor(protected apiService: ApiService) { }
 
   toggleTopbar(): void {
     this.showTopbar = !this.showTopbar;

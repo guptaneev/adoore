@@ -1,9 +1,19 @@
-<button (click)="onClick()">This is a sample API Call!</button>
-<p style="color:brown">Here is the result!: {{ message }}</p>
+<div class="topbar fade-in">
+  <button (click)="onClick()">This is a sample API Call!</button>
+  <p style="color:brown">Here is the result!: {{ message }}</p>
+</div>
 
 <div class="search-container">
   <div class="search-bar">
-    <input type="text" placeholder="Filter by city" [(ngModel)]="cityInput" />
+    <mat-form-field appearance="fill">
+      <mat-label>Filter by city</mat-label>
+      <input type="text" matInput [formControl]="cityInputControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredCities | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
     <button type="button" (click)="searchButton()">Search by city</button>
   </div>
 </div>

@@ -1,17 +1,86 @@
-/* Put these styles in: src/styles.css */
-
-* {
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body {
-  font-family: 'Be Vietnam Pro', sans-serif;
-}
-:root {
-  --primary-color: #605DC8;
-  --secondary-color: #8B89E6;
-  --accent-color: #e8e7fa;
-  --shadow-color: #E8E8E8;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  overflow: hidden; /* Prevent scrollbars */
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+.landing-page {
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/background-image.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 1s ease-in-out;
+}
+
+.zoomed-in .landing-page {
+  transform: scale(1.1);
+
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  background-color: #FBCB33;
+  opacity: 0.9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}

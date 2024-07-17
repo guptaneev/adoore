@@ -12,6 +12,9 @@ import {TopbarComponent} from "./topbar/topbar.component";
 import {CitiesListComponent} from "./cities-list/cities-list.component";
 import {CitySearchResultsComponent} from "./city-search-results/city-search-results.component";
 import {NgOptimizedImage} from "@angular/common";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import {NgOptimizedImage} from "@angular/common";
         BrowserModule,
         AppRoutingModule,
         NgOptimizedImage,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatFormFieldModule
     ],
   providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
   bootstrap: [AppComponent]
