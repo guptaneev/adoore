@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../api-service.service';
+import {NotificationService} from "../notification.service";
 
 @Component({
   selector: 'app-topbar',
@@ -12,12 +13,11 @@ import { ApiService } from '../api-service.service';
 export class TopbarComponent implements OnInit {
   cityInputControl = new FormControl();
   filteredCities: Observable<string[]>;
-  cityInput: string = '';
   message: any;
   lowercaseInput: string = '';
   cityOptions: string[] = ['Austin','Dallas','Houston'];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private notificationService: NotificationService) {
     this.filteredCities = this.cityInputControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || ''))
@@ -40,14 +40,17 @@ export class TopbarComponent implements OnInit {
 
   searchButton() {
     this.lowercaseInput = this.cityInputControl.value.toLowerCase();
-    if (this.apiService.isValidCity(this.lowercaseInput) && !(this.apiService.isUserSelectedCity(this.lowercaseInput))) {
-      console.log('Data used', this.lowercaseInput);
-      this.apiService.addToUserSelectedCities(this.lowercaseInput);
-      console.log(this.apiService.getUserSelectedCities());
+    if (this.apiService.isUserSelectedCity(this.lowercaseInput)) {
+      this.notificationService.show('Cannot input duplicate city "' + this.cityInputControl.value + '", try again.');
     } else {
-      console.log('Invalid/Duplicate city', this.cityInputControl.value);
+      if (!(this.apiService.isValidCity(this.lowercaseInput))) {
+        this.notificationService.show('City "' + this.cityInputControl.value + '" not in city list, try again.')
+      } else {
+        this.notificationService.show('Inputted city ' + this.apiService.capitalizeFirstLetter(this.lowercaseInput) + ' accepted.');
+        this.apiService.addToUserSelectedCities(this.lowercaseInput);
+      }
     }
   }
 
-  ngOnInit(): void { }
+    ngOnInit(): void {}
 }

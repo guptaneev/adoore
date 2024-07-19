@@ -15,6 +15,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NgOptimizedImage,
     MatAutocompleteModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule
   ],
   providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
   bootstrap: [AppComponent]
