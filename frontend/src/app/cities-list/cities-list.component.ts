@@ -13,9 +13,6 @@ export class CitiesListComponent implements OnInit {
   constructor(protected apiService: ApiService, private appComponent: AppComponent) {
 
   }
-  goToResults() {
-    this.appComponent.toggleTopbar()
-  }
 
   ngOnInit(): void {
   }

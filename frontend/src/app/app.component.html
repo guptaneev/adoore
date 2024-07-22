@@ -1,12 +1,18 @@
-<h1>{{ title }}</h1>
-<p>Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</p>
-<ul style="font-size: 15px; color: #007bff;" (click)="this.setTopbar(true); this.apiService.clearUserSelectedCities();">Home</ul>
+<div class="fullscreen-image">
+  <div class="overlay"></div>
+  <h1 class="home-button" (click)="homeButton()">{{ title }}</h1>
+  <div class="subtext-container">
+    <h2 class="subtext">Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</h2>
+  </div>
+  <div class="content">
+    <ng-container *ngIf="getTopbar()">
+      <app-topbar></app-topbar>
+    </ng-container>
 
-<section class="content">
-  <ng-container *ngIf="this.getTopbar()">
-    <app-topbar></app-topbar>
-  </ng-container>
-  <ng-container *ngIf="!(this.getTopbar())">
-    <app-city-search-results></app-city-search-results>
-  </ng-container>
-</section>
+    <ng-container *ngIf="!getTopbar()">
+      <app-city-search-results></app-city-search-results>
+    </ng-container>
+  </div>
+</div>
+
+

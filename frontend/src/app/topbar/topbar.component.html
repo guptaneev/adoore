@@ -1,22 +1,24 @@
-<div class="topbar fade-in">
-  <button (click)="onClick()">This is a sample API Call!</button>
-  <p style="color:brown">Here is the result!: {{ message }}</p>
-</div>
+<section class="content">
+  <div class="search-container">
+    <div class="search-bar">
+      <mat-form-field appearance="fill" class="mat-form-field">
+        <mat-label>Filter by city</mat-label>
+        <input type="text" matInput [formControl]="cityInputControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredCities | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button type="button" (click)="searchButton()">Add City</button>
+    </div>
 
-<div class="search-container">
-  <div class="search-bar">
-    <mat-form-field appearance="fill">
-      <mat-label>Filter by city</mat-label>
-      <input type="text" matInput [formControl]="cityInputControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredCities | async" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button type="button" (click)="searchButton()">Search by city</button>
+    <div class="city-list">
+      <app-cities-list></app-cities-list>
+    </div>
   </div>
-</div>
-<section class="results">
-  <app-cities-list></app-cities-list>
+
+  <div class="results">
+    <button type="button" class="compare-button" (click)="goToResults()">Compare!</button>
+  </div>
 </section>

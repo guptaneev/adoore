@@ -1,10 +1,5 @@
 <section class="city-list-container fade-in">
   <ul *ngFor="let city of userCitiesList">
-    <li class="list-item">{{ city }} <img src="close-icon.png" alt="x" (click)="this.apiService.removeCity(city)"></li>
+    <li class="list-item">{{ city }} <img src="././assets/close-icon.png" alt="x" (click)="this.apiService.removeCity(city)"></li>
   </ul>
-</section>
-<section>
-  <button class="compare-button" (click)="goToResults()">
-    Compare!
-  </button>
 </section>

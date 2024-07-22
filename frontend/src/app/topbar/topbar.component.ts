@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../api-service.service';
 import {NotificationService} from "../notification.service";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-topbar',
@@ -17,7 +18,7 @@ export class TopbarComponent implements OnInit {
   lowercaseInput: string = '';
   cityOptions: string[] = ['Austin','Dallas','Houston'];
 
-  constructor(private apiService: ApiService, private notificationService: NotificationService) {
+  constructor(private apiService: ApiService, private notificationService: NotificationService, private appComponent: AppComponent) {
     this.filteredCities = this.cityInputControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || ''))
@@ -36,6 +37,10 @@ export class TopbarComponent implements OnInit {
     }, error => {
       console.error('Error fetching message', error);
     });
+  }
+
+  goToResults() {
+    this.appComponent.toggleTopbar()
   }
 
   searchButton() {

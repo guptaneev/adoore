@@ -24,4 +24,9 @@ export class AppComponent {
   getTopbar() {
     return this.showTopbar;
   }
+
+  homeButton() {
+    this.apiService.clearUserSelectedCities();
+    this.setTopbar(true);
+  }
 }

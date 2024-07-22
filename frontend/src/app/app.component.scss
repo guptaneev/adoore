@@ -1,13 +1,75 @@
-/* Put these src/app/app.component.css */
-:host {
-  --content-padding: 10px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
-header {
-  display: block;
-  height: 60px;
-  padding: var(--content-padding);
-  box-shadow: 0px 5px 25px var(--shadow-color);
+
+ul {
+  list-style: none;
 }
+
+.fullscreen-image {
+  height: 100vh;
+  background: url('/assets/background-image.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Optional: darkens the image */
+  z-index: 1;
+}
+
+.home-button {
+  color: #fff;
+  font-size: 48px;
+  z-index: 2;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  cursor: pointer;
+  left: 20px;
+
+}
+
+.subtext-container {
+  text-align: center;
+  margin-top: 20px;
+  z-index: 2;
+}
+
+.subtext {
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  margin-top: 20px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .content {
-  padding: var(--content-padding);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  position: relative;
+  width: 80%;
+  margin: 20px auto;
 }
+
