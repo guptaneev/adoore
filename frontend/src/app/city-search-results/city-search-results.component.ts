@@ -9,7 +9,7 @@ import {ApiService} from "../api-service.service";
 export class CitySearchResultsComponent implements OnInit {
   userCitiesList: string[] = this.apiService.getUserSelectedCities();
 
-  constructor(private apiService: ApiService) {
+  constructor(protected apiService: ApiService) {
     console.log(this.userCitiesList);
   }
 

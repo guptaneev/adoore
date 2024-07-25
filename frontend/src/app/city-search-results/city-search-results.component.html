@@ -1,6 +1,6 @@
 <section>
   <p>You searched for:</p>
   <ul *ngFor="let userCity of userCitiesList">
-    <li>{{ userCity }}</li>
+    <li>{{ this.apiService.capitalizeFirstLetter(userCity) }}</li>
   </ul>
 </section>

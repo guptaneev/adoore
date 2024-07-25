@@ -1,5 +1,5 @@
-<section class="city-list-container fade-in">
+<section>
   <ul *ngFor="let city of userCitiesList">
-    <li class="list-item">{{ city }} <img src="././assets/close-icon.png" alt="x" (click)="this.apiService.removeCity(city)"></li>
+    <li class="list-item">{{ this.apiService.capitalizeFirstLetter(city) }} <img src="././assets/close-icon.png" class="close-icon" alt="x" (click)="this.apiService.removeCity(city)"></li>
   </ul>
 </section>
