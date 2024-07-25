@@ -57,5 +57,8 @@ export class TopbarComponent implements OnInit {
     }
   }
 
+  // getCities(): returns all cities in U.S.
+
+
     ngOnInit(): void {}
 }

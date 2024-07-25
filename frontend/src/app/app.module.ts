@@ -11,18 +11,22 @@ import {AppRoutingModule} from "./app.routing.module";
 import {TopbarComponent} from "./topbar/topbar.component";
 import {CitiesListComponent} from "./cities-list/cities-list.component";
 import {CitySearchResultsComponent} from "./city-search-results/city-search-results.component";
-import {NgOptimizedImage} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgChartsModule } from "ng2-charts";
+import { LineChartComponent } from "./line-chart/line-chart.component";
+import {Line} from "chartist";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     CitiesListComponent,
-    CitySearchResultsComponent
+    CitySearchResultsComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -38,7 +42,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule,
+    NgChartsModule,
   ],
   providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
   bootstrap: [AppComponent]
