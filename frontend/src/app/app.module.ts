@@ -19,6 +19,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgChartsModule } from "ng2-charts";
 import { LineChartComponent } from "./line-chart/line-chart.component";
 import {Line} from "chartist";
+import {APP_INITIALIZER} from "@angular/core";
+import {ApiService} from "./api-service.service";
+import {initializeApp} from "./app-init";
 
 @NgModule({
   declarations: [
@@ -46,7 +49,14 @@ import {Line} from "chartist";
     CommonModule,
     NgChartsModule,
   ],
-  providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent],
+  providers: [TopbarComponent, AppComponent, CitySearchResultsComponent, CitiesListComponent,
+    ApiService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [ApiService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

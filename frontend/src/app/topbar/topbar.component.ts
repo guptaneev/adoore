@@ -16,7 +16,7 @@ export class TopbarComponent implements OnInit {
   filteredCities: Observable<string[]>;
   message: any;
   lowercaseInput: string = '';
-  cityOptions: string[] = ['Austin','Dallas','Houston'];
+  cityOptions: string[] = this.apiService.getValidCities();
 
   constructor(private apiService: ApiService, private notificationService: NotificationService, private appComponent: AppComponent) {
     this.filteredCities = this.cityInputControl.valueChanges.pipe(
@@ -48,7 +48,7 @@ export class TopbarComponent implements OnInit {
     if (this.apiService.isUserSelectedCity(this.lowercaseInput)) {
       this.notificationService.show('Cannot input duplicate city "' + this.cityInputControl.value + '", try again.');
     } else {
-      if (!(this.apiService.isValidCity(this.lowercaseInput))) {
+      if (!(this.apiService.isValidCity(this.cityInputControl.value))) {
         this.notificationService.show('City "' + this.cityInputControl.value + '" not in city list, try again.')
       } else {
         this.notificationService.show('Inputted city ' + this.apiService.capitalizeFirstLetter(this.lowercaseInput) + ' accepted.');

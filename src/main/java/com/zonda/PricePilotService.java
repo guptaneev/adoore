@@ -32,14 +32,11 @@ public class PricePilotService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResults() {return Response.ok("hello").build(); }
 
-
-
-
     @GET
     @Path("/markets")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarkets() {
-        String filePath = Paths.get("/Users/bkandibedala/IdeaProjects/HousingPricePilot/src/main/resources/market.csv").toString();
+        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         Map<String, String> marketMap = readMarketCSV(filePath);
         return Response.ok(marketMap).build();
     }
@@ -74,7 +71,7 @@ public class PricePilotService {
     @Path("/market-names")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarketNames() {
-        String filePath = Paths.get("/Users/bkandibedala/IdeaProjects/HousingPricePilot/src/main/resources/market.csv").toString();
+        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         List<String> marketNames = readMarketNamesCSV(filePath);
         return Response.ok(marketNames).build();
     }
