@@ -3,6 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NotificationService } from "./notification.service";
 
+export interface MarketData {
+  qmiCount: number;
+  homeCount: number;
+  avgPricePerSft: number;
+  poolPercentage: number;
+  viewsPercentage: number;
+  waterfrontPercentage: number;
+  gatedPercentage: number;
+  naturePercentage: number;
+  parksPercentage: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,10 +22,15 @@ export class ApiService {
 
   private apiUrl = 'http://localhost:8080/HousingPricePilot-1.0-SNAPSHOT/rws/price-pilot/hello';
   private userSelectedCities: string[] = [];
+  private marketDataUrl = 'http://localhost:8080/HousingPricePilot-1.0-SNAPSHOT/rws/price-pilot/market-data';
   private validCities: string[] = ['Austin', 'Houston', 'Dallas'];
 
 
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
+
+  getMarketData(markets: string[]): Observable<{ [key: string]: MarketData }> {
+    return this.http.post<{ [key: string]: MarketData }>(this.apiUrl, markets);
+  }
 
   getHelloMessage(): Observable<string> {
     return this.http.get(this.apiUrl, { responseType: 'text' });
