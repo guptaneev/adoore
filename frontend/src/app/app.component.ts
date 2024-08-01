@@ -15,7 +15,6 @@ export class AppComponent {
 
   toggleTopbar(): void {
     this.showTopbar = !this.showTopbar;
-    console.log(this.apiService.getValidCities());
   }
 
   setTopbar(value: boolean) {

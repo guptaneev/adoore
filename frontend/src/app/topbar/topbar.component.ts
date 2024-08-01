@@ -40,25 +40,29 @@ export class TopbarComponent implements OnInit {
   }
 
   goToResults() {
-    this.appComponent.toggleTopbar()
+    if (this.apiService.isEmpty()) {
+      this.notificationService.show('Please enter at least one city!')
+    } else {
+      this.appComponent.toggleTopbar()}
   }
 
   searchButton() {
-    this.lowercaseInput = this.cityInputControl.value.toLowerCase();
-    if (this.apiService.isUserSelectedCity(this.lowercaseInput)) {
-      this.notificationService.show('Cannot input duplicate city "' + this.cityInputControl.value + '", try again.');
+    if (this.apiService.isFull()) {
+      this.notificationService.show('Maximum of 4 cities!')
     } else {
-      if (!(this.apiService.isValidCity(this.cityInputControl.value))) {
-        this.notificationService.show('City "' + this.cityInputControl.value + '" not in city list, try again.')
+      this.lowercaseInput = this.cityInputControl.value.toLowerCase();
+      if (this.apiService.isUserSelectedCity(this.lowercaseInput)) {
+        this.notificationService.show('Cannot input duplicate city "' + this.cityInputControl.value + '", try again.');
       } else {
-        this.notificationService.show('Inputted city ' + this.apiService.capitalizeFirstLetter(this.lowercaseInput) + ' accepted.');
-        this.apiService.addToUserSelectedCities(this.lowercaseInput);
+        if (!(this.apiService.isValidCity(this.cityInputControl.value))) {
+          this.notificationService.show('City "' + this.cityInputControl.value + '" not in city list, try again.')
+        } else {
+          this.notificationService.show('Inputted city ' + this.apiService.capitalizeFirstLetter(this.lowercaseInput) + ' accepted.');
+          this.apiService.addToUserSelectedCities(this.lowercaseInput);
+        }
       }
     }
   }
-
-  // getCities(): returns all cities in U.S.
-
 
     ngOnInit(): void {}
 }

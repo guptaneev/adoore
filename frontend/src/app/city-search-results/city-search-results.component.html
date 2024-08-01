@@ -1,9 +1,19 @@
-<section>
-  <p>You searched for:</p>
-  <ul *ngFor="let userCity of userCitiesList">
-    <li>{{ this.apiService.capitalizeFirstLetter(userCity) }}</li>
-  </ul>
-</section>
-<section class="charts">
-  <app-line-chart></app-line-chart>
+<section class="dashboard">
+  <div class="search-container">
+    <p>You searched for:</p>
+    <ul *ngFor="let userCity of userCitiesList">
+      <li>{{ this.apiService.capitalizeFirstLetter(userCity) }}</li>
+    </ul>
+  </div>
+  <div class="charts-container">
+    <div class="chart-box">
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="lineChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="radarChart"></canvas>
+    </div>
+  </div>
 </section>

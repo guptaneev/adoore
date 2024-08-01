@@ -42,7 +42,7 @@ a:hover {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: url('src/main/webapp/assets/background-image.jpg') no-repeat center center/cover;
+  background: url('/Users/ngupta/repositories/housingpricepilot/src/main/webapp/assets/background-image.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -42,7 +42,7 @@ public class PricePilotService {
     @Path("/markets")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarkets() {
-        String filePath = Paths.get("/Users/bkandibedala/IdeaProjects/HousingPricePilot/src/main/resources/market.csv").toString();
+        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         return Response.ok(marketMap).build();
     }
 
@@ -53,7 +53,7 @@ public class PricePilotService {
     @Path("/market-names")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarketNames() {
-        String filePath = Paths.get("/Users/bkandibedala/IdeaProjects/HousingPricePilot/src/main/resources/market.csv").toString();
+        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         List<String> marketNames = new ArrayList<>(marketMap.values());
         return Response.ok(marketNames).build();
     }
@@ -96,7 +96,7 @@ public class PricePilotService {
 
                 return extractMarketData(response.toString());
             } else {
-                System.err.println("GET request not worked for market ID " + marketId + ": Response Code " + responseCode);
+                System.err.println("GET request failed for market ID " + marketId + ": Response Code " + responseCode);
             }
         } catch (IOException e) {
             System.err.println("Error fetching data for market ID " + marketId);
@@ -118,7 +118,7 @@ public class PricePilotService {
             String prRange = (String) facets.get("PrRange");
             String sftRange = (String) facets.get("SftRange");
 
-            double avgPricePerSft = calculateAveragePricePerSft(prRange, sftRange);
+            double medianPricePerSft = calculateMedianPricePerSft(prRange, sftRange);
 
             double poolPercentage = (int) facets.get("Pool") / (double) homeCount * 100;
             double viewsPercentage = (int) facets.get("Views") / (double) homeCount * 100;
@@ -127,31 +127,50 @@ public class PricePilotService {
             double naturePercentage = (int) facets.get("Nature") / (double) homeCount * 100;
             double parksPercentage = (int) facets.get("Parks") / (double) homeCount * 100;
 
-            return new MarketData(qmiCount, homeCount, avgPricePerSft, poolPercentage, viewsPercentage, waterfrontPercentage, gatedPercentage, naturePercentage, parksPercentage);
+            double roundedPoolPercentage = Math.round(poolPercentage * 10) / 10.0;
+            double roundedViewsPercentage = Math.round(viewsPercentage * 10) / 10.0;
+            double roundedWaterfrontPercentage = Math.round(waterfrontPercentage * 10) / 10.0;
+            double roundedGatedPercentage = Math.round(gatedPercentage * 10) / 10.0;
+            double roundedNaturePercentage = Math.round(naturePercentage * 10) / 10.0;
+            double roundedParksPercentage = Math.round(parksPercentage * 10) / 10.0;
+
+            return new MarketData(
+                    Math.round(qmiCount),
+                    Math.round(homeCount),
+                    Math.round(medianPricePerSft),
+                    roundedPoolPercentage,
+                    roundedViewsPercentage,
+                    roundedWaterfrontPercentage,
+                    roundedGatedPercentage,
+                    roundedNaturePercentage,
+                    roundedParksPercentage
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private double calculateAveragePricePerSft(String prRange, String sftRange) {
+    private double calculateMedianPricePerSft(String prRange, String sftRange) {
         String[] prRangeSplit = prRange.split("-");
         String[] sftRangeSplit = sftRange.split("-");
 
         double minPrice = Double.parseDouble(prRangeSplit[0]);
         double maxPrice = Double.parseDouble(prRangeSplit[1]);
-        double avgPrice = (minPrice + maxPrice) / 2;
+
+        double medianPrice = (minPrice + maxPrice) / 2;
 
         double minSft = Double.parseDouble(sftRangeSplit[0]);
         double maxSft = Double.parseDouble(sftRangeSplit[1]);
-        double avgSft = (minSft + maxSft) / 2;
 
-        return avgPrice / avgSft;
+        double medianSft = (minSft + maxSft) / 2;
+
+        return medianPrice / medianSft;
     }
 
 
     private static Map<String, String> loadMarketData() {
-        String filePath = Paths.get("/Users/bkandibedala/IdeaProjects/HousingPricePilot/src/main/resources/market.csv").toString();
+        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         Map<String, String> marketMap = new HashMap<>();
 
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
