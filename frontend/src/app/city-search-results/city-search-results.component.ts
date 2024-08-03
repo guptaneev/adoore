@@ -32,140 +32,190 @@ export class CitySearchResultsComponent implements OnInit {
     const labels = Object.keys(this.marketData);
     const data = labels.map(market => Math.round(this.marketData[market].qmiCount / this.marketData[market].homeCount * 100));
 
-    new Chart('barChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Quick Move-In Homes (%)',
-          data: data,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: false
-          },
-          tooltip: {
-            backgroundColor: 'rgba(0,0,0,0.7)',
-            titleFont: {
-              size: 14
-            },
-            bodyFont: {
-              size: 12
-            }
-          }
+    const barCanvas = document.getElementById('barChart') as HTMLCanvasElement;
+    const barCtx = barCanvas?.getContext('2d');
+
+    if (barCtx) {
+      const gradient = barCtx.createLinearGradient(0, 0, 0, barCtx.canvas.height);
+      gradient.addColorStop(0, 'rgba(255, 99, 132, 0.5)');
+      gradient.addColorStop(1, 'rgba(54, 162, 235, 0.5)');
+
+      new Chart(barCanvas, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Quick Move-In Homes (%)',
+            data: data,
+            backgroundColor: gradient,
+            borderColor: '#6495ED',
+            borderWidth: 1
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: {
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
               display: false
             },
             title: {
-              display: true,
-              text: 'Percentage (%)',
-              color: '#333',
-              font: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              titleFont: {
                 size: 14
-              }
+              },
+              bodyFont: {
+                size: 12
+              },
+              cornerRadius: 5,
+              caretSize: 8,
+              padding: {
+                top: 10,
+                right: 10,
+                bottom: 10,
+                left: 10
+              },
+              displayColors: false
             }
           },
-          x: {
-            grid: {
-              display: false
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Percentage (%)',
+                color: '#ffffff',
+                font: {
+                  size: 14
+                }
+              }
             },
-            title: {
-              display: true,
-              text: 'Markets',
-              color: '#333',
-              font: {
-                size: 14
+            x: {
+              grid: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Markets',
+                color: '#ffffff',
+                font: {
+                  size: 14
+                }
               }
             }
           }
         }
-      }
-    });
+      });
+    } else {
+      console.error('Failed to get 2D context for bar chart');
+    }
   }
 
   createLineChart(): void {
     const labels = Object.keys(this.marketData);
     const data = labels.map(market => this.marketData[market].avgPricePerSft);
 
-    new Chart('lineChart', {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Median Price per Square Foot ($)',
-          data: data,
-          backgroundColor: 'rgba(153, 102, 255, 0.2)',
-          borderColor: 'rgba(153, 102, 255, 1)',
-          borderWidth: 2,
-          pointBackgroundColor: 'rgba(153, 102, 255, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(153, 102, 255, 1)'
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: false
-          },
-          tooltip: {
-            backgroundColor: 'rgba(0,0,0,0.7)',
-            titleFont: {
-              size: 14
-            },
-            bodyFont: {
-              size: 12
-            }
-          }
+    const lineCanvas = document.getElementById('lineChart') as HTMLCanvasElement;
+    const lineCtx = lineCanvas?.getContext('2d');
+
+    if (lineCtx) {
+      // Create gradient that spans the entire height of the canvas
+      const gradient = lineCtx.createLinearGradient(0, 0, 0, lineCtx.canvas.height);
+      gradient.addColorStop(0, 'rgb(100,149,237)');
+      gradient.addColorStop(1, 'rgba(243,47,90,0)');
+
+      new Chart(lineCanvas, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Median Price per Square Foot ($)',
+            data: data,
+            backgroundColor: gradient,
+            borderColor: '#6495ED',
+            borderWidth: 2,
+            pointBackgroundColor: '#6495ED',
+            pointBorderColor: '#6495ED',
+            pointHoverBackgroundColor: '#6495ED',
+            pointHoverBorderColor: '#6495ED',
+            tension: 0.4,
+            fill: true // This ensures the area under the line is filled
+          }]
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: {
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
               display: false
             },
             title: {
-              display: true,
-              text: 'Price ($)',
-              color: '#333',
-              font: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              titleFont: {
                 size: 14
+              },
+              bodyFont: {
+                size: 12
+              },
+              cornerRadius: 5,
+              caretSize: 8,
+              padding: {
+                top: 10,
+                right: 10,
+                bottom: 10,
+                left: 10
+              },
+              displayColors: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Price ($)',
+                color: '#ffffff',
+                font: {
+                  size: 14
+                }
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Markets',
+                color: '#ffffff',
+                font: {
+                  size: 14
+                }
               }
             }
           },
-          x: {
-            grid: {
-              display: false
-            },
-            title: {
-              display: true,
-              text: 'Markets',
-              color: '#333',
-              font: {
-                size: 14
-              }
+          elements: {
+            line: {
+              fill: 'start'
             }
           }
         }
-      }
-    });
+      });
+    } else {
+      console.error('Failed to get 2D context for line chart');
+    }
   }
 
   createRadarChart(): void {
@@ -210,42 +260,50 @@ export class CitySearchResultsComponent implements OnInit {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
-          },
-          title: {
-            display: false
+            display: true,
+            labels: {
+              color: '#ffffff'
+            }
           },
           tooltip: {
-            backgroundColor: 'rgba(0,0,0,0.7)',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
             titleFont: {
               size: 14
             },
             bodyFont: {
               size: 12
-            }
+            },
+            cornerRadius: 5,
+            caretSize: 8,
+            padding: {
+              top: 10,
+              right: 10,
+              bottom: 10,
+              left: 10
+            },
+            displayColors: false
           }
         },
         scales: {
           r: {
-            min: 0,  // Set minimum value to 0
-            angleLines: {
-              display: false
-            },
             grid: {
               display: false
             },
             pointLabels: {
-              color: '#333',
+              color: '#ffffff',
               font: {
                 size: 14
               }
+            },
+            angleLines: {
+              color: '#ffffff'
             }
           }
         }
       }
     });
-
   }
 }

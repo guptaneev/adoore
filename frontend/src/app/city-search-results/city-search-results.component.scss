@@ -4,7 +4,7 @@
   align-items: center;
   padding: 20px;
   background-color: #ffffff;
-  color: #333333;
+  color: #ffffff;
   width: 100%;
   box-sizing: border-box;
 }
@@ -12,11 +12,11 @@
 .search-container {
   width: 100%;
   max-width: 1200px;
-  background-color: #f0f0f0;
+  background-color: lightgray;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
 }
 
@@ -33,14 +33,23 @@
 .chart-box {
   flex: 1;
   min-width: 300px;
-  background-color: #f0f0f0;
+  background-color: lightgray;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
 }
 
 canvas {
   max-width: 100%;
   box-sizing: border-box;
+}
+
+.tooltip {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333333;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
