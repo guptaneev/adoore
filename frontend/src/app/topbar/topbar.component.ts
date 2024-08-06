@@ -32,7 +32,7 @@ export class TopbarComponent implements OnInit {
 
   goToResults() {
     if (this.apiService.isEmpty()) {
-      this.notificationService.show('Please enter at least one city!')
+      this.notificationService.show('Please enter at least two cities to compare!')
     } else {
       this.appComponent.toggleTopbar()}
   }

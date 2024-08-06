@@ -51,10 +51,6 @@ export class ApiService {
     );
   }
 
-  getHelloMessage(): Observable<string> {
-    return this.http.get(this.apiUrl, { responseType: 'text' });
-  }
-
   getUserSelectedCities() {
     return this.userSelectedCities;
   }
@@ -89,7 +85,7 @@ export class ApiService {
   }
 
   isEmpty() {
-    return this.userSelectedCities.length <= 0;
+    return this.userSelectedCities.length <= 1;
   }
 
   capitalizeFirstLetter(cityState: string) {

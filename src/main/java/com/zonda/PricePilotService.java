@@ -118,7 +118,7 @@ public class PricePilotService {
             String prRange = (String) facets.get("PrRange");
             String sftRange = (String) facets.get("SftRange");
 
-            double medianPricePerSft = calculateMedianPricePerSft(prRange, sftRange);
+            double medianPricePerSft = calculateAvgPricePerSft(prRange, sftRange);
 
             double poolPercentage = (int) facets.get("Pool") / (double) homeCount * 100;
             double viewsPercentage = (int) facets.get("Views") / (double) homeCount * 100;
@@ -151,21 +151,21 @@ public class PricePilotService {
         return null;
     }
 
-    private double calculateMedianPricePerSft(String prRange, String sftRange) {
+    private double calculateAvgPricePerSft(String prRange, String sftRange) {
         String[] prRangeSplit = prRange.split("-");
         String[] sftRangeSplit = sftRange.split("-");
 
         double minPrice = Double.parseDouble(prRangeSplit[0]);
         double maxPrice = Double.parseDouble(prRangeSplit[1]);
 
-        double medianPrice = (minPrice + maxPrice) / 2;
+        double avgPrice = (minPrice + maxPrice) / 2;
 
         double minSft = Double.parseDouble(sftRangeSplit[0]);
         double maxSft = Double.parseDouble(sftRangeSplit[1]);
 
-        double medianSft = (minSft + maxSft) / 2;
+        double avgSft = (minSft + maxSft) / 2;
 
-        return medianPrice / medianSft;
+        return avgPrice / avgSft;
     }
 
 

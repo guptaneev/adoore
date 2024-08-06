@@ -1,9 +1,21 @@
 <section class="dashboard">
   <div class="search-container">
-    <p>You searched for:</p>
-    <ul *ngFor="let userCity of userCitiesList">
-      <li>{{ this.apiService.capitalizeFirstLetter(userCity) }}</li>
-    </ul>
+    <div class="search-item">
+      <div class="item-content">
+        <p>You searched for:</p>
+        <ul *ngFor="let userCity of userCitiesList">
+          <li>{{ this.apiService.capitalizeFirstLetter(userCity) }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="search-item">
+      <div class="item-content">
+        <p>Price Ranges:</p>
+        <ul *ngFor="let price of priceRanges">
+          <li>{{ price }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="charts-container">
     <div class="chart-box">

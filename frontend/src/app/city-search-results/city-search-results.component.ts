@@ -11,6 +11,7 @@ export class CitySearchResultsComponent implements OnInit {
   userCitiesList: string[] = this.apiService.getUserSelectedCities();
   userCitiesListFormatted: string[] = this.apiService.formatCityList(this.userCitiesList);
   marketData: { [key: string]: MarketData } = {};
+  priceRanges: string[] = [];
 
   constructor(protected apiService: ApiService) {}
 
@@ -18,6 +19,7 @@ export class CitySearchResultsComponent implements OnInit {
     this.apiService.getMarketData(this.userCitiesListFormatted).subscribe(data => {
       console.log(this.userCitiesList);
       this.marketData = data;
+      this.priceRanges = this.getPriceRanges();
       this.createCharts();
     });
   }
@@ -26,6 +28,15 @@ export class CitySearchResultsComponent implements OnInit {
     this.createBarChart();
     this.createLineChart();
     this.createRadarChart();
+  }
+
+  getPriceRanges(): string[] { // Add this function
+    // Sample data for price ranges, replace with actual data as needed
+    return this.userCitiesListFormatted.map(city => {
+      const minPrice = (Math.random() * 200000 + 100000).toFixed(0);
+      const maxPrice = (Math.random() * 400000 + 500000).toFixed(0);
+      return `${city}: $${minPrice} - $${maxPrice}`;
+    });
   }
 
   createBarChart(): void {
@@ -146,7 +157,7 @@ export class CitySearchResultsComponent implements OnInit {
         data: {
           labels: labels,
           datasets: [{
-            label: 'Median Price per Square Foot ($)',
+            label: 'Average Price per Square Foot ($)',
             data: data,
             backgroundColor: gradient,
             borderColor: '#4a90e2',
@@ -356,3 +367,4 @@ export class CitySearchResultsComponent implements OnInit {
     }
   }
 }
+

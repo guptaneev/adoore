@@ -12,7 +12,7 @@ $font-family: 'Arial, sans-serif';
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #4a90e2;
+  background-color: $primary-color;
   color: $text-color;
   width: 100%;
   box-sizing: border-box;
@@ -21,15 +21,35 @@ $font-family: 'Arial, sans-serif';
 }
 
 .search-container {
+  display: flex;
   width: 100%;
   max-width: 1200px;
-  background-color: $search-background-color;
-  padding: 20px;
-  border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 8px $box-shadow-color;
+  gap: 20px;
   box-sizing: border-box;
-  color: $text-color;
+
+  .search-item {
+    flex: 1;
+    background-color: $search-background-color;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px $box-shadow-color;
+    box-sizing: border-box;
+
+    .item-content {
+      color: $text-color;
+
+      p {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        padding-left: 20px;
+        list-style-type: disc;
+      }
+    }
+  }
 }
 
 .charts-container {
