@@ -7,41 +7,28 @@
 
 .topbar {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
 .search-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-}
-
-.description-text {
-  margin-right: 20px;
-  text-align: left;
-
-  h2 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
-  }
-
-  p {
-    margin: 5px 0 0;
-    font-size: 1em;
-    color: #666;
-  }
 }
 
 .search-bar {
   display: flex;
   align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
 }
 
 .mat-form-field {
@@ -62,12 +49,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-.city-list {
-  flex: 1;
-  display: flex;
-  justify-content: center;
 }
 
 .compare-container {

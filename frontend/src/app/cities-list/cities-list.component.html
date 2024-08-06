@@ -1,5 +1,5 @@
 <section>
   <ul *ngFor="let city of userCitiesList">
-    <li class="list-item">{{ this.apiService.capitalizeFirstLetter(city) }} <img src='src/main/webapp/assets/close-icon.png' class="close-icon" alt="x" (click)="this.apiService.removeCity(city)"></li>
+    <li class="list-item">{{ this.apiService.capitalizeFirstLetter(city) }} <img src='/Users/ngupta/repositories/housingpricepilot/src/main/webapp/assets/close-round-icon.svg' class="close-icon" alt="x" (click)="this.apiService.removeCity(city)"></li>
   </ul>
 </section>

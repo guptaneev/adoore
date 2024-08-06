@@ -30,15 +30,6 @@ export class TopbarComponent implements OnInit {
     return this.cityOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  onClick(): void {
-    this.apiService.getHelloMessage().subscribe(response => {
-      this.message = response;
-      console.log(response);
-    }, error => {
-      console.error('Error fetching message', error);
-    });
-  }
-
   goToResults() {
     if (this.apiService.isEmpty()) {
       this.notificationService.show('Please enter at least one city!')

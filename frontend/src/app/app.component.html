@@ -4,21 +4,21 @@
   <div class="subtext-container">
     <h2 class="subtext">Welcome to adoore, your solution for <i>cross-country city comparison</i> (CCCC)!</h2>
   </div>
-  <div class="content">
+  <div class="content-container">
     <div class="description-text" *ngIf="getTopbar()">
       <h2>Find and Compare Cities</h2>
       <p>Start by typing a city name to add it to your comparison list.</p>
       <p>Then, click the compare button when you're ready!</p>
     </div>
 
-    <ng-container *ngIf="getTopbar()">
-      <app-topbar></app-topbar>
-    </ng-container>
+    <div class="dynamic-content">
+      <ng-container *ngIf="getTopbar()">
+        <app-topbar></app-topbar>
+      </ng-container>
 
-    <ng-container *ngIf="!getTopbar()">
-      <app-city-search-results></app-city-search-results>
-    </ng-container>
+      <ng-container *ngIf="!getTopbar()">
+        <app-city-search-results></app-city-search-results>
+      </ng-container>
+    </div>
   </div>
 </div>
-
-

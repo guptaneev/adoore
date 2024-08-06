@@ -1,23 +1,35 @@
+$primary-color: #4a90e2;
+$secondary-color: #50e3c2;
+$background-color: #f5f5f5;
+$text-color: #333333;
+$search-background-color: #ffffff;
+$chart-box-background-color: #ffffff;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+$font-family: 'Arial, sans-serif';
+
 .dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #ffffff;
-  color: #ffffff;
+  background-color: #4a90e2;
+  color: $text-color;
   width: 100%;
   box-sizing: border-box;
+  font-family: $font-family;
+  border-radius: 10px;
 }
 
 .search-container {
   width: 100%;
   max-width: 1200px;
-  background-color: lightgray;
+  background-color: $search-background-color;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px $box-shadow-color;
   box-sizing: border-box;
+  color: $text-color;
 }
 
 .charts-container {
@@ -33,10 +45,10 @@
 .chart-box {
   flex: 1;
   min-width: 300px;
-  background-color: lightgray;
+  background-color: $chart-box-background-color;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px $box-shadow-color;
   box-sizing: border-box;
 }
 
@@ -47,7 +59,7 @@ canvas {
 
 .tooltip {
   background: rgba(255, 255, 255, 0.9);
-  color: #333333;
+  color: $text-color;
   font-size: 14px;
   padding: 10px;
   border-radius: 5px;
