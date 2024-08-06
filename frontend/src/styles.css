@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'SurvivalInstinct';
-  src: url('http://localhost:8080/fonts/SurvivalInstinx-1jnDj.ttf') format('truetype');
+  src: url('assets/fonts/SurvivalInstinx-1jnDj.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -49,7 +49,7 @@ a:hover {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: url('http://localhost:8080/assets/background-image.jpg') no-repeat center center/cover;
+  background: url('assets/background-image.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
