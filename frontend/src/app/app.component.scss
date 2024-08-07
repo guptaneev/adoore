@@ -4,7 +4,7 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
   overflow-x: hidden;
 }
 
@@ -40,6 +40,7 @@ ul {
   top: 20px;
   cursor: pointer;
   left: 20px;
+  padding-bottom: px;
 
 }
 
@@ -47,6 +48,7 @@ ul {
   text-align: center;
   margin-top: 20px;
   z-index: 2;
+  padding-bottom: 30px;
 }
 
 .subtext {
@@ -78,6 +80,7 @@ ul {
 .description-text {
   text-align: center;
   margin-bottom: 20px;
+  font-family: Lato, serif;
 
   h2 {
     margin: 0 0 10px 0;

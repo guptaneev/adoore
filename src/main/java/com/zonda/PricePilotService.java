@@ -143,7 +143,8 @@ public class PricePilotService {
                     roundedWaterfrontPercentage,
                     roundedGatedPercentage,
                     roundedNaturePercentage,
-                    roundedParksPercentage
+                    roundedParksPercentage,
+                    prRange
             );
         } catch (IOException e) {
             e.printStackTrace();

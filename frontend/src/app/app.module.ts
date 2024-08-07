@@ -18,7 +18,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgChartsModule } from "ng2-charts";
 import { LineChartComponent } from "./line-chart/line-chart.component";
-import {Line} from "chartist";
 import {APP_INITIALIZER} from "@angular/core";
 import {ApiService} from "./api-service.service";
 import {initializeApp} from "./app-init";

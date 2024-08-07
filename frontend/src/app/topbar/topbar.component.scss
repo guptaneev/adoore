@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   background: none;
+  font-family: Lato, serif;
 }
 
 .topbar {
@@ -56,9 +57,14 @@ button:hover {
   text-align: center;
 }
 
+.add-city-button {
+  font-family: 'Lato', serif;
+}
+
 .compare-button {
   display: inline-block;
   padding: 15px 30px;
+  font-family: 'Lato', serif;
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;

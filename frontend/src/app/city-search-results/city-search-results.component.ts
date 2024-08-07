@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, MarketData } from "../api-service.service";
 import { Chart } from 'chart.js';
+import {DecimalPipe} from "@angular/common";
 
 @Component({
   selector: 'app-city-search-results',
   templateUrl: './city-search-results.component.html',
-  styleUrls: ['./city-search-results.component.scss']
+  styleUrls: ['./city-search-results.component.scss'],
+  providers: [DecimalPipe]
 })
 export class CitySearchResultsComponent implements OnInit {
   userCitiesList: string[] = this.apiService.getUserSelectedCities();
   userCitiesListFormatted: string[] = this.apiService.formatCityList(this.userCitiesList);
   marketData: { [key: string]: MarketData } = {};
-  priceRanges: string[] = [];
+  lowHighPrices: { city: string, low: string, high: string }[] = [];
 
-  constructor(protected apiService: ApiService) {}
+  constructor(protected apiService: ApiService, private decimalPipe: DecimalPipe) {}
 
   ngOnInit(): void {
     this.apiService.getMarketData(this.userCitiesListFormatted).subscribe(data => {
       console.log(this.userCitiesList);
       this.marketData = data;
-      this.priceRanges = this.getPriceRanges();
       this.createCharts();
+      this.lowHighPrices = this.getLowHighPrices();
     });
   }
 
@@ -30,12 +32,10 @@ export class CitySearchResultsComponent implements OnInit {
     this.createRadarChart();
   }
 
-  getPriceRanges(): string[] { // Add this function
-    // Sample data for price ranges, replace with actual data as needed
-    return this.userCitiesListFormatted.map(city => {
-      const minPrice = (Math.random() * 200000 + 100000).toFixed(0);
-      const maxPrice = (Math.random() * 400000 + 500000).toFixed(0);
-      return `${city}: $${minPrice} - $${maxPrice}`;
+  getLowHighPrices(): { city: string, low: string, high: string }[] {
+    return Object.keys(this.marketData).map(city => {
+      const [low, high] = this.marketData[city].prRange.split('-').map(price => this.decimalPipe.transform(price, '1.0-0') || '0');
+      return { city, low, high };
     });
   }
 
@@ -70,19 +70,31 @@ export class CitySearchResultsComponent implements OnInit {
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: false
+              display: false,
+              labels: {
+                font: {
+                  family: 'Lato',
+                  size: 14
+                }
+              }
             },
             title: {
-              display: false
+              display: false,
+              font: {
+                family: 'Lato',
+                size: 18
+              }
             },
             tooltip: {
               backgroundColor: 'rgba(0, 0, 0, 0.7)',
               titleColor: '#ffffff',
               bodyColor: '#ffffff',
               titleFont: {
+                family: 'Lato',
                 size: 14
               },
               bodyFont: {
+                family: 'Lato',
                 size: 12
               },
               cornerRadius: 5,
@@ -95,12 +107,8 @@ export class CitySearchResultsComponent implements OnInit {
               },
               displayColors: false,
               callbacks: {
-                title: (tooltipItems) => {
-                  return tooltipItems[0].label;
-                },
-                label: (tooltipItem) => {
-                  return `% of Communities with ${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
-                }
+                title: (tooltipItems) => tooltipItems[0].label,
+                label: (tooltipItem) => `% of Communities with ${tooltipItem.dataset.label}: ${tooltipItem.raw}`
               }
             }
           },
@@ -115,7 +123,13 @@ export class CitySearchResultsComponent implements OnInit {
                 text: 'Percentage (%)',
                 color: '#333333',
                 font: {
+                  family: 'Lato',
                   size: 14
+                }
+              },
+              ticks: {
+                font: {
+                  family: 'Lato'
                 }
               }
             },
@@ -128,7 +142,13 @@ export class CitySearchResultsComponent implements OnInit {
                 text: 'Markets',
                 color: '#333333',
                 font: {
+                  family: 'Lato',
                   size: 14
+                }
+              },
+              ticks: {
+                font: {
+                  family: 'Lato'
                 }
               }
             }
@@ -175,19 +195,31 @@ export class CitySearchResultsComponent implements OnInit {
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: false
+              display: false,
+              labels: {
+                font: {
+                  family: 'Lato',
+                  size: 14
+                }
+              }
             },
             title: {
-              display: false
+              display: false,
+              font: {
+                family: 'Lato',
+                size: 18
+              }
             },
             tooltip: {
               backgroundColor: 'rgba(0, 0, 0, 0.7)',
               titleColor: '#ffffff',
               bodyColor: '#ffffff',
               titleFont: {
+                family: 'Lato',
                 size: 14
               },
               bodyFont: {
+                family: 'Lato',
                 size: 12
               },
               cornerRadius: 5,
@@ -200,12 +232,8 @@ export class CitySearchResultsComponent implements OnInit {
               },
               displayColors: false,
               callbacks: {
-                title: (tooltipItems) => {
-                  return tooltipItems[0].label;
-                },
-                label: (tooltipItem) => {
-                  return `Median Price per Square Foot: $${tooltipItem.raw}`;
-                }
+                title: (tooltipItems) => tooltipItems[0].label,
+                label: (tooltipItem) => `Average Price per Square Foot: $${tooltipItem.raw}`
               }
             }
           },
@@ -220,7 +248,13 @@ export class CitySearchResultsComponent implements OnInit {
                 text: 'Price ($)',
                 color: '#333333',
                 font: {
+                  family: 'Lato',
                   size: 14
+                }
+              },
+              ticks: {
+                font: {
+                  family: 'Lato'
                 }
               }
             },
@@ -233,7 +267,13 @@ export class CitySearchResultsComponent implements OnInit {
                 text: 'Markets',
                 color: '#333333',
                 font: {
+                  family: 'Lato',
                   size: 14
+                }
+              },
+              ticks: {
+                font: {
+                  family: 'Lato'
                 }
               }
             }
@@ -301,7 +341,11 @@ export class CitySearchResultsComponent implements OnInit {
             legend: {
               display: true,
               labels: {
-                color: '#333333'
+                color: '#333333',
+                font: {
+                  family: 'Lato',
+                  size: 14
+                }
               }
             },
             title: {
@@ -309,6 +353,7 @@ export class CitySearchResultsComponent implements OnInit {
               text: 'Facets',
               color: '#333333',
               font: {
+                family: 'Lato',
                 size: 18
               }
             },
@@ -317,10 +362,12 @@ export class CitySearchResultsComponent implements OnInit {
               titleColor: '#ffffff',
               bodyColor: '#ffffff',
               titleFont: {
+                family: 'Lato',
                 size: 14,
                 weight: 'bold'
               },
               bodyFont: {
+                family: 'Lato',
                 size: 12
               },
               cornerRadius: 5,
@@ -333,9 +380,7 @@ export class CitySearchResultsComponent implements OnInit {
               },
               displayColors: false,
               callbacks: {
-                title: (tooltipItems) => {
-                  return tooltipItems[0]?.dataset.label || '';
-                },
+                title: (tooltipItems) => tooltipItems[0]?.dataset.label || '',
                 label: (tooltipItem) => {
                   const label = tooltipItem.label;
                   const value = tooltipItem.raw;
@@ -352,6 +397,7 @@ export class CitySearchResultsComponent implements OnInit {
               pointLabels: {
                 color: '#333333',
                 font: {
+                  family: 'Lato',
                   size: 14
                 }
               },

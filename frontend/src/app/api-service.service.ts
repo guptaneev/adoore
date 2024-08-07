@@ -14,6 +14,7 @@ export interface MarketData {
   gatedPercentage: number;
   naturePercentage: number;
   parksPercentage: number;
+  prRange: string;
 }
 
 @Injectable({

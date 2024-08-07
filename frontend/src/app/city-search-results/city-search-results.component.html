@@ -11,8 +11,8 @@
     <div class="search-item">
       <div class="item-content">
         <p>Price Ranges:</p>
-        <ul *ngFor="let price of priceRanges">
-          <li>{{ price }}</li>
+        <ul *ngFor="let price of lowHighPrices">
+          <li>{{ price.city }}: ${{ price.low }} - ${{ price.high }}</li>
         </ul>
       </div>
     </div>

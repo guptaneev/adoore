@@ -10,8 +10,9 @@ public class MarketData {
     private double gatedPercentage;
     private double naturePercentage;
     private double parksPercentage;
+    private String prRange;
 
-    public MarketData(int qmiCount, int homeCount, double avgPricePerSft, double poolPercentage, double viewsPercentage, double waterfrontPercentage, double gatedPercentage, double naturePercentage, double parksPercentage) {
+    public MarketData(int qmiCount, int homeCount, double avgPricePerSft, double poolPercentage, double viewsPercentage, double waterfrontPercentage, double gatedPercentage, double naturePercentage, double parksPercentage, String prRange) {
         this.qmiCount = qmiCount;
         this.homeCount = homeCount;
         this.avgPricePerSft = avgPricePerSft;
@@ -21,6 +22,7 @@ public class MarketData {
         this.gatedPercentage = gatedPercentage;
         this.naturePercentage = naturePercentage;
         this.parksPercentage = parksPercentage;
+        this.prRange = prRange;
     }
 
     public int getQmiCount() {
@@ -93,5 +95,12 @@ public class MarketData {
 
     public void setParksPercentage(double parksPercentage) {
         this.parksPercentage = parksPercentage;
+    }
+    public String getPrRange() {
+        return prRange;
+    }
+
+    public void setPrRange(String prRange) {
+        this.prRange = prRange;
     }
 }
