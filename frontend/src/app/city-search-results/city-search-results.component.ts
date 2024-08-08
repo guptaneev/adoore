@@ -245,7 +245,7 @@ export class CitySearchResultsComponent implements OnInit {
               },
               title: {
                 display: true,
-                text: 'Price ($)',
+                text: 'Price ($) per Square Foot',
                 color: '#333333',
                 font: {
                   family: 'Lato',
