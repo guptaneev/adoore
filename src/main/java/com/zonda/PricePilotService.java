@@ -9,24 +9,17 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Path("/price-pilot")
 public class PricePilotService {
-
-
     private static final Map<String, String> marketMap = loadMarketData();
+
     @GET
     @Path("/hello")
     @Produces("text/plain")
@@ -34,26 +27,17 @@ public class PricePilotService {
         return Response.ok("Hello, World! Bhim").build();
     }
 
-
-
-
-
     @GET
     @Path("/markets")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarkets() {
-        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         return Response.ok(marketMap).build();
     }
-
-
-
 
     @GET
     @Path("/market-names")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMarketNames() {
-        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
         List<String> marketNames = new ArrayList<>(marketMap.values());
         return Response.ok(marketNames).build();
     }
@@ -76,6 +60,28 @@ public class PricePilotService {
         return Response.ok(marketDataMap).build();
     }
 
+    private static Map<String, String> loadMarketData() {
+        Map<String, String> marketMap = new HashMap<>();
+        try (InputStream inputStream = PricePilotService.class.getResourceAsStream("/market.csv");
+             InputStreamReader reader = new InputStreamReader(inputStream);
+             CSVReader csvReader = new CSVReader(reader)) {
+            
+            List<String[]> lines = csvReader.readAll();
+            for (String[] line : lines) {
+                if (line.length >= 5) {
+                    String key = line[0];
+                    String marketName = line[1];
+                    String state = line[4];
+                    String value = marketName + ", " + state;
+                    marketMap.put(key, value);
+                }
+            }
+        } catch (IOException | CsvException e) {
+            e.printStackTrace();
+        }
+        return marketMap;
+    }
+
     private MarketData fetchMarketData(String marketId) {
         String urlString = "https://api.newhomesource.com/api/v2/Search/CommunityLocations?partnerid=1&marketid=" + marketId + "&SortBy=Random&SortSecondBy=None&EndpointType=None";
         try {
@@ -84,17 +90,11 @@ public class PricePilotService {
             conn.setRequestMethod("GET");
 
             int responseCode = conn.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // success
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (Scanner scanner = new Scanner(conn.getInputStream())) {
+                    scanner.useDelimiter("\\A");
+                    return scanner.hasNext() ? extractMarketData(scanner.next()) : null;
                 }
-                in.close();
-
-                return extractMarketData(response.toString());
             } else {
                 System.err.println("GET request failed for market ID " + marketId + ": Response Code " + responseCode);
             }
@@ -114,38 +114,12 @@ public class PricePilotService {
 
             int qmiCount = (Integer) resultCounts.get("QmiCount");
             int homeCount = (Integer) resultCounts.get("HomeCount");
-
             String prRange = (String) facets.get("PrRange");
             String sftRange = (String) facets.get("SftRange");
 
             double medianPricePerSft = calculateAvgPricePerSft(prRange, sftRange);
 
-            double poolPercentage = (int) facets.get("Pool") / (double) homeCount * 100;
-            double viewsPercentage = (int) facets.get("Views") / (double) homeCount * 100;
-            double waterfrontPercentage = (int) facets.get("WaterFront") / (double) homeCount * 100;
-            double gatedPercentage = (int) facets.get("Gated") / (double) homeCount * 100;
-            double naturePercentage = (int) facets.get("Nature") / (double) homeCount * 100;
-            double parksPercentage = (int) facets.get("Parks") / (double) homeCount * 100;
-
-            double roundedPoolPercentage = Math.round(poolPercentage * 10) / 10.0;
-            double roundedViewsPercentage = Math.round(viewsPercentage * 10) / 10.0;
-            double roundedWaterfrontPercentage = Math.round(waterfrontPercentage * 10) / 10.0;
-            double roundedGatedPercentage = Math.round(gatedPercentage * 10) / 10.0;
-            double roundedNaturePercentage = Math.round(naturePercentage * 10) / 10.0;
-            double roundedParksPercentage = Math.round(parksPercentage * 10) / 10.0;
-
-            return new MarketData(
-                    Math.round(qmiCount),
-                    Math.round(homeCount),
-                    Math.round(medianPricePerSft),
-                    roundedPoolPercentage,
-                    roundedViewsPercentage,
-                    roundedWaterfrontPercentage,
-                    roundedGatedPercentage,
-                    roundedNaturePercentage,
-                    roundedParksPercentage,
-                    prRange
-            );
+            return new MarketData(qmiCount, homeCount, (int) medianPricePerSft);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,42 +132,13 @@ public class PricePilotService {
 
         double minPrice = Double.parseDouble(prRangeSplit[0]);
         double maxPrice = Double.parseDouble(prRangeSplit[1]);
-
         double avgPrice = (minPrice + maxPrice) / 2;
 
         double minSft = Double.parseDouble(sftRangeSplit[0]);
         double maxSft = Double.parseDouble(sftRangeSplit[1]);
-
         double avgSft = (minSft + maxSft) / 2;
 
         return avgPrice / avgSft;
-    }
-
-
-    private static Map<String, String> loadMarketData() {
-        String filePath = Paths.get("/Users/ngupta/repositories/housingpricepilot/src/main/resources/market.csv").toString();
-        Map<String, String> marketMap = new HashMap<>();
-
-        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
-            List<String[]> lines = reader.readAll();
-
-            // Assuming the first row is the header
-            for (int i = 0; i < lines.size(); i++) {
-                String[] line = lines.get(i);
-                if (line.length >= 5) {
-                    String key = line[0];
-                    String marketName = line[1];
-                    String state = line[4];
-                    String value = marketName + ", " + state;
-
-                    marketMap.put(key, value);
-                }
-            }
-        } catch (IOException | CsvException e) {
-            e.printStackTrace();
-        }
-
-        return marketMap;
     }
 
     private String getKeyByValue(Map<String, String> map, String value) {
@@ -204,7 +149,4 @@ public class PricePilotService {
         }
         return null;
     }
-
-
 }
-//
