@@ -1,8 +1,35 @@
-# adoore.
+# Adoore - City Comparison Tool
 
-# An application based around cross-country city comparison (CCCC), leveraging the BDX NewHomeSource Web API. The application takes in cities as input from the user. It returns ng2-chart (chart.js) graphs depicting comparisons between different metrics, such as price per square foot, quick move-in percentage (QMI), and the percentage of communities with different facets (ie. pool, views, etc.). It was developed during my time as a software engineering intern at ZondaHome.
+**ZondaHome Internship Project**  
+Adoore is a cross-country city comparison tool that provides housing insights using data from the BDX NewHomeSource Web API. It enables users, including home buyers and real estate professionals, to compare key metrics like price per square foot, quick move-in percentages, and community amenities.
 
-# Canva presentation for a more in-depth look! (make sure to view it in present mode). Read the speaker notes also!
-# https://www.canva.com/design/DAGNR7YWxaI/CGfrWiCsNTt7pe7Rc7krwQ/edit?utm_content=DAGNR7YWxaI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+![Adoore Dashboard](image.png)
 
-# Special thanks to Bhimesh Kandibedala for assisting me.
+## Features
+
+- **Comprehensive Housing Insights**
+  - Price per square foot
+  - Quick move-in home availability
+  - Community amenities analysis (Pools, Parks, Views, etc.)
+- **Dynamic City Comparisons**
+  - Compare multiple cities at once
+  - Visualize key trends in real estate markets
+- **Interactive Data Visualizations**
+  - Chart.js used for intuitive bar charts, line graphs, and radar plots
+- **Robust API Integration**
+  - Fetches and processes real-time housing data
+  - Uses BDX NewHomeSource Web API for accurate metrics
+- **Optimized Front-End & Back-End**
+  - Angular-based UI for interactive exploration
+  - Java back-end for efficient data handling and API requests
+
+## Technologies Used
+
+- Angular & Typescript (for front-end development)
+- Java (for back-end API processing)
+- Chart.js (for data visualization)
+- BDX NewHomeSource API (for real estate data)
+- Jakarta EE (for efficient application support)
+
+## Acknowledgements
+Special thanks to **Bhimesh Kandibedala** for assisting me throughout development.
